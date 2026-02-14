@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine Surprise 💖</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: pink;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        font-family: 'Arial', sans-serif;
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        color: red;
+        font-size: 20px;
+        animation: float 6s infinite;
+        opacity: 0.7;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(100vh) scale(0.5); }
+        100% { transform: translateY(-10vh) scale(1.5); }
+    }
+
+    /* First card */
+    .card {
+        background: white;
+        padding: 30px 20px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        z-index: 10;
+        max-width: 90%;
+        width: 500px;
+    }
+
+    h1 {
+        color: #e60073;
+        font-size: 1.5rem;
+        margin: 15px 0;
+    }
+
+    button {
+        padding: 12px 25px;
+        margin: 10px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 30px;
+    }
+
+    .yes {
+        background: #ff4d88;
+        color: white;
+        cursor: pointer;
+    }
+
+    .no {
+        background: gray;
+        color: white;
+        cursor: pointer;
+        position: relative;
+    }
+
+    /* Result screen */
+   .result {
+    display: none; /* hidden initially */
+    position: fixed;
+    inset: 0;
+    background-image: url('https://i.imgur.com/a5lwqkx.jpeg');
+    background-repeat: no-repeat;
+    background-position: center top; /* center horizontally, top vertically */
+    background-size: contain; /* show full image without cropping */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+    
+
+    .message-box {
+        background: rgba(0,0,0,0.6);
+        padding: 30px 40px;
+        border-radius: 25px;
+        color: white;
+        font-size: 1.5rem;
+        text-align: center;
+        text-shadow: 1px 1px 6px black;
+        max-width: 90%;
+        word-wrap: break-word;
+    }
+
+    /* Responsive */
+    @media screen and (max-width: 600px) {
+        h1 { font-size: 1.2rem; }
+        button { font-size: 0.9rem; padding: 10px 20px; }
+        .message-box { font-size: 1.1rem; padding: 20px 25px; }
+    }
+
+/* Mobile adjustments */
+@media screen and (max-width: 768px) {
+    .result {
+        background-position: center center;
+        background-size: contain;
+    }
+}
+
+</style>
+</head>
+<body onbeforeunload="return 'You must answer first 💕';">
+
+<!-- First card -->
+<div class="card" id="card">
+    <h1>Nadeesha Here I am sending my love to you 💘</h1>
+    <h1>Do you love me too?????</h1>
+    <button class="yes" onclick="sayYes()">YES 💖</button>
+    <button class="no" id="noBtn">NO 😅</button>
+</div>
+
+<!-- Result -->
+<div class="result" id="result" style="display:none;">
+    <div class="message-box">
+        💕Hey Bhooooo!!!! You are not just my Valentine — you are my whole love, my safe place, and my forever.
+        Every heartbeat of mine chooses you. 🤍💕
+    </div>
+</div>
+
+<script>
+window.onload = function() {
+    // Floating hearts after page load
+    for (let i = 0; i < 40; i++) {
+        let heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+        document.body.appendChild(heart);
+    }
+
+    // NO button runs away
+    const noBtn = document.getElementById("noBtn");
+    noBtn.addEventListener("mouseover", moveButton);
+    noBtn.addEventListener("click", moveButton);
+
+    function moveButton() {
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        noBtn.style.position = "absolute";
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+}
+
+// YES button function
+function sayYes() {
+    document.getElementById("card").style.display = "none";
+    document.getElementById("result").style.display = "flex";
+}
+</script>
+</body>
+</html>
